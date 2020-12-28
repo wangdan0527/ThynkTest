@@ -1,0 +1,122 @@
+<div>
+  <div *ngIf="!edit && !model">
+    <h3>Please select an Employee</h3>
+  </div>
+  <mat-spinner [diameter]="20" *ngIf="beingSubmit"></mat-spinner>
+
+
+  <div class="p-4" *ngIf="model || edit">
+    <div class="float-right display-block w-100">
+      <button mat-button color="primary" class="float-right">
+        <mat-icon aria-hidden="false" aria-label="Example home icon">delete</mat-icon>
+      </button>
+      
+      <button mat-button color="primary" class="float-right" (click)="onEdit()" *ngIf="!edit">
+        <mat-icon aria-hidden="false" aria-label="Example home icon">edit</mat-icon>
+      </button>
+
+      <button mat-button color="primary" class="float-right" (click)="onSave()" *ngIf="edit">
+        <mat-icon aria-hidden="false" aria-label="Example home icon">save</mat-icon>
+      </button>
+    </div>
+
+    <img (click)="onLoadImage()" #plan [src]="model?.ProfileImage" />
+    <form [formGroup]="employeeForm">
+      <input #fileInput type="file" (change)="onUploadImage($event)" hidden />
+      <div *ngIf="!imageUploaded">
+        <small class="text-danger">
+          Profile Image is required.
+        </small>
+      </div>
+      <mat-label>Name</mat-label>
+      <h4 *ngIf="!edit && model">{{model.Name}}</h4>
+      <mat-form-field class="w-100" *ngIf="edit">
+        <input matInput formControlName="Name" />
+      </mat-form-field>
+      <div *ngIf="
+          employeeForm.get('Name').invalid &&
+          employeeForm.get('Name').errors &&
+          (employeeForm.get('Name').dirty || employeeForm.get('Name').touched)
+        ">
+        <small class="text-danger" *ngIf="employeeForm.get('Name').hasError('required')">
+          This field is required.
+        </small>
+      </div>
+      <mat-label>Title</mat-label>
+      <h4 *ngIf="!edit && model">{{model.Title}}</h4>
+      <mat-form-field class="w-100" *ngIf="edit">
+        <input matInput formControlName="Title" />
+      </mat-form-field>
+      <div *ngIf="
+          employeeForm.get('Title').invalid &&
+          employeeForm.get('Title').errors &&
+          (employeeForm.get('Title').dirty || employeeForm.get('Title').touched)
+        ">
+        <small class="text-danger" *ngIf="employeeForm.get('Title').hasError('required')">
+          This field is required.
+        </small>
+      </div>
+      <mat-label>Motto</mat-label>
+      <h4 *ngIf="!edit && model">{{model.Motto}}</h4>
+      <mat-form-field class="w-100" *ngIf="edit">
+        <input matInput formControlName="Motto" />
+      </mat-form-field>
+      <div *ngIf="
+          employeeForm.get('Motto').invalid &&
+          employeeForm.get('Motto').errors &&
+          (employeeForm.get('Motto').dirty || employeeForm.get('Motto').touched)
+        ">
+        <small class="text-danger" *ngIf="employeeForm.get('Motto').hasError('required')">
+          This field is required.
+        </small>
+      </div>
+      <mat-label>Hobbies</mat-label>
+      <h4 *ngIf="!edit && model">{{model.Hobbies}}</h4>
+      <mat-form-field class="w-100" *ngIf="edit">
+        <input matInput formControlName="Hobbies" />
+      </mat-form-field>
+      <div *ngIf="
+          employeeForm.get('Hobbies').invalid &&
+          employeeForm.get('Hobbies').errors &&
+          (employeeForm.get('Hobbies').dirty ||
+            employeeForm.get('Hobbies').touched)
+        ">
+        <small class="text-danger" *ngIf="employeeForm.get('Hobbies').hasError('required')">
+          This field is required.
+        </small>
+      </div>
+      <mat-label>Hometown</mat-label>
+      <h4 *ngIf="!edit && model">{{model.Hometown}}</h4>
+      <mat-form-field class="w-100" *ngIf="edit">
+        <input matInput formControlName="Hometown" />
+      </mat-form-field>
+      <div *ngIf="
+          employeeForm.get('Hometown').invalid &&
+          employeeForm.get('Hometown').errors &&
+          (employeeForm.get('Hometown').dirty ||
+            employeeForm.get('Hometown').touched)
+        ">
+        <small class="text-danger" *ngIf="employeeForm.get('Hometown').hasError('required')">
+          This field is required.
+        </small>
+      </div>
+      <mat-label>Personal Blog</mat-label>
+      <h4 *ngIf="!edit && model">{{model.Blog}}</h4>
+      <mat-form-field class="w-100" *ngIf="edit">
+        <input matInput formControlName="Blog" />
+      </mat-form-field>
+      <div *ngIf="
+          employeeForm.get('Blog').invalid &&
+          employeeForm.get('Blog').errors &&
+          (employeeForm.get('Blog').dirty || employeeForm.get('Blog').touched)
+        ">
+        <small class="text-danger" *ngIf="employeeForm.get('Blog').hasError('required')">
+          This field is required.
+        </small>
+        <small class="text-danger" *ngIf="employeeForm.get('Blog').hasError('pattern')">
+          Invalid format
+        </small>
+      </div>
+    </form>
+  </div>
+</div>

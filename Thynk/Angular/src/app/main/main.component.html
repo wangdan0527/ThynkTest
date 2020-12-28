@@ -1,0 +1,33 @@
+<div class="row">
+  <div class="col-6 p-4">
+    <div class="header-container">
+      <h1 class="float-left">List of Employees</h1>
+      <button mat-button color="primary" class="float-right" (click)="onAddEmployee()">
+        <mat-icon aria-hidden="false" aria-label="Example home icon">add</mat-icon>
+      </button>
+    </div>
+
+    <div>
+      <div *ngFor="let employee of employees" class="employee-container d-flex p-1" (click)="onSelectEmployee(employee);">
+        <div class="d-inline-block pl-3">
+          <img src="{{employee.ProfileImage}}" />
+        </div>
+        <div class="d-inline-block pl-3">
+          <h2>            
+            {{employee.Name}}
+          </h2>
+          <h3>            
+            {{employee.Title}}
+          </h3>
+        </div>
+
+        <button mat-button color="primary" class="float-right" (click)="onRemoveEmployee(employee.Id)">
+          <mat-icon aria-hidden="false" aria-label="Example home icon">delete</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="col-6">
+    <app-detail [edit]="edit" [model]="currentModel" (reload)="loadEmployees()"></app-detail>
+  </div>
+</div>
